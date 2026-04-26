@@ -1,0 +1,133 @@
+/* Layout (header + sidebar + footer) */
+
+:host {
+  display: block;
+  min-height: 100dvh;
+  color: #0f172a;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.shell {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: #f6f7fb;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.header__inner,
+.footer__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer__inner {
+  justify-content: center;
+  text-align: center;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+}
+
+.brand__logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.brand__title {
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.body {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1rem;
+}
+
+.sidebar {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 0.75rem;
+  height: fit-content;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav__item {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgba(15, 23, 42, 0.82);
+  font-weight: 550;
+}
+
+.nav__item:hover {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.nav__item.is-active {
+  background: rgba(56, 189, 248, 0.18);
+  color: #0f172a;
+}
+
+.main {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+  min-height: 50dvh;
+}
+
+.footer {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.muted {
+  color: rgba(15, 23, 42, 0.7);
+}
+
+@media (max-width: 900px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+

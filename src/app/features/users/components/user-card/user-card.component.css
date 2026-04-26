@@ -1,0 +1,76 @@
+.card {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: 0.9rem;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.card__header {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  object-fit: cover;
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.name {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.username {
+  margin: 0.15rem 0 0;
+  color: rgba(15, 23, 42, 0.65);
+  font-size: 0.9rem;
+}
+
+.meta {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.email {
+  color: rgba(2, 132, 199, 0.95);
+  text-decoration: none;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.email:hover {
+  text-decoration: underline;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  font-size: 0.8rem;
+  font-weight: 650;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.18);
+  color: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.chip--soft {
+  background: rgba(148, 163, 184, 0.18);
+}
+

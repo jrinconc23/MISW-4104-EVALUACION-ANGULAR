@@ -1,0 +1,49 @@
+<header class="page-header">
+  <h2>Usuarios</h2>
+  <p class="muted">Listado de usuarios</p>
+</header>
+
+@if (loading()) {
+  <p class="muted">Cargando usuarios...</p>
+} @else if (error()) {
+  <p class="error">{{ error() }}</p>
+} @else {
+  <section class="md" aria-label="Maestro detalle usuarios">
+    <div class="md__detail" aria-label="Detalle de usuario">
+      @if (selectedUser()) {
+        <app-user-card [user]="selectedUser()!" />
+      } @else {
+        <p class="muted">Selecciona un usuario para ver el detalle.</p>
+      }
+    </div>
+
+    <div class="md__master" aria-label="Lista de usuarios">
+      <div class="search" aria-label="Buscador">
+        <input
+          class="search__input"
+          type="search"
+          placeholder="Buscar por nombre..."
+          [value]="query()"
+          (input)="query.set(($any($event.target).value ?? ''))"
+        />
+      </div>
+
+      @for (user of pagedUsers(); track user.id) {
+        <button class="md__row" type="button" (click)="selectUser(user)">
+          <app-user-list-item [user]="user" [selected]="selectedUser()?.id === user.id" />
+        </button>
+      }
+    </div>
+
+    <div class="pager" aria-label="Paginación">
+      <button class="pager__btn" type="button" (click)="prevPage()" [disabled]="page() === 1">
+        Anterior
+      </button>
+      <span class="pager__text">Página {{ page() }} / {{ totalPages() }}</span>
+      <button class="pager__btn" type="button" (click)="nextPage()" [disabled]="page() === totalPages()">
+        Siguiente
+      </button>
+    </div>
+  </section>
+}
+

@@ -1,0 +1,20 @@
+<article class="card" aria-label="Usuario">
+  <header class="card__header">
+    <img class="avatar" [src]="user().avatarUrl" [alt]="user().name" loading="lazy" />
+
+    <div class="id">
+      <h3 class="name">{{ user().name }}</h3>
+      <p class="username">@{{ user().username }}</p>
+    </div>
+  </header>
+
+  <div class="meta">
+    <a class="email" [href]="'mailto:' + user().email">{{ user().email }}</a>
+
+    <div class="chips" aria-label="Atributos">
+      <span class="chip" title="Rol">{{ user().role }}</span>
+      <span class="chip chip--soft" title="Ubicación">{{ user().location }}</span>
+    </div>
+  </div>
+</article>
+

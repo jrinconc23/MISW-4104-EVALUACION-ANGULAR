@@ -1,0 +1,8 @@
+<div class="item" [class.is-selected]="selected()" aria-label="Usuario">
+  <img class="avatar" [src]="user().avatarUrl" [alt]="user().name" loading="lazy" />
+
+  <div class="text">
+    <span class="name">{{ user().name }}</span>
+  </div>
+</div>
+

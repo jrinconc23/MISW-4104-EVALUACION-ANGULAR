@@ -1,0 +1,44 @@
+<section class="home" aria-label="Inicio">
+  <header class="hero">
+    <div class="hero__copy">
+      <h1 class="hero__title">Evaluación Angular</h1>
+      <p class="hero__subtitle">
+        Acá se puede encontrar información de usuarios y repositorios.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" routerLink="/users">Ver usuarios</a>
+        <a class="btn btn--ghost" routerLink="/">Ir al inicio</a>
+      </div>
+    </div>
+
+    <div class="hero__panel" aria-hidden="true">
+      <div class="stat">
+        <span class="stat__kpi">Usuarios</span>
+        <span class="stat__hint">Listado + detalle</span>
+      </div>
+      <div class="stat">
+        <span class="stat__kpi">Repos</span>
+        <span class="stat__hint">Próximamente</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="grid" aria-label="Accesos rápidos">
+    <article class="card">
+      <h2 class="card__title">Usuarios</h2>
+      <p class="card__text muted">
+        Consulta usuarios, navega con paginación y filtra por nombre.
+      </p>
+      <a class="card__link" routerLink="/users">Abrir módulo</a>
+    </article>
+
+    <article class="card card--soft">
+      <h2 class="card__title">Repositorios</h2>
+      <p class="card__text muted">
+        Aquí podrás explorar repositorios asociados a usuarios.
+      </p>
+      <span class="pill">En construcción</span>
+    </article>
+  </section>
+</section>
