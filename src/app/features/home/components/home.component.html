@@ -1,25 +1,27 @@
 <section class="home" aria-label="Inicio">
   <header class="hero">
     <div class="hero__copy">
-      <h1 class="hero__title">Evaluación Angular</h1>
+      <p class="hero__eyebrow">MISW 4104</p>
+      <h1 class="hero__title">Conceptos web con Angular</h1>
       <p class="hero__subtitle">
-        Acá se puede encontrar información de usuarios y repositorios.
+        Explora usuarios y repositorios desde datos remotos: listados con búsqueda y paginación, y detalle de
+        repositorio con propietario resuelto desde el catálogo de usuarios.
       </p>
 
       <div class="hero__actions">
         <a class="btn btn--primary" routerLink="/users">Ver usuarios</a>
-        <a class="btn btn--ghost" routerLink="/">Ir al inicio</a>
+        <a class="btn btn--secondary" routerLink="/repositories">Ver repositorios</a>
       </div>
     </div>
 
     <div class="hero__panel" aria-hidden="true">
       <div class="stat">
         <span class="stat__kpi">Usuarios</span>
-        <span class="stat__hint">Listado + detalle</span>
+        <span class="stat__hint">Listado maestro–detalle, buscador y paginación</span>
       </div>
       <div class="stat">
-        <span class="stat__kpi">Repos</span>
-        <span class="stat__hint">Próximamente</span>
+        <span class="stat__kpi">Repositorios</span>
+        <span class="stat__hint">Tarjetas, detalle y enlace al propietario</span>
       </div>
     </div>
   </header>
@@ -28,17 +30,19 @@
     <article class="card">
       <h2 class="card__title">Usuarios</h2>
       <p class="card__text muted">
-        Consulta usuarios, navega con paginación y filtra por nombre.
+        Consulta el listado, filtra por nombre y navega por páginas; el panel lateral muestra la ficha del usuario
+        seleccionado.
       </p>
       <a class="card__link" routerLink="/users">Abrir módulo</a>
     </article>
 
-    <article class="card card--soft">
+    <article class="card">
       <h2 class="card__title">Repositorios</h2>
       <p class="card__text muted">
-        Aquí podrás explorar repositorios asociados a usuarios.
+        Navega el catálogo con buscador y paginación; al abrir un repositorio verás lenguaje, estrellas, fechas y la
+        tarjeta del propietario cuando exista en usuarios.
       </p>
-      <span class="pill">En construcción</span>
+      <a class="card__link" routerLink="/repositories">Abrir módulo</a>
     </article>
   </section>
 </section>

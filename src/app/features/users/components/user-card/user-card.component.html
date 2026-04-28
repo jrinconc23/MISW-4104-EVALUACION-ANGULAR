@@ -16,5 +16,42 @@
       <span class="chip chip--soft" title="Ubicación">{{ user().location }}</span>
     </div>
   </div>
-</article>
 
+  @if (repositories() !== undefined) {
+    <section class="repos" aria-labelledby="user-repos-heading">
+      <h4 id="user-repos-heading" class="repos__title">Repositorios asociados</h4>
+      @if (repositories()!.length) {
+        <ul class="repos__list">
+          @for (repo of repositories()!; track repo.id) {
+            <li class="repos__item">
+              <a
+                class="repo-card"
+                [routerLink]="['/repositories', repo.id]"
+                [attr.aria-label]="'Ver repositorio ' + repo.name"
+              >
+                <div class="repo-card__main">
+                  <span class="repo-card__name">{{ repo.name }}</span>
+                  <p class="repo-card__desc">{{ repo.description || 'Sin descripción.' }}</p>
+                </div>
+                <div class="repo-card__meta">
+                  @if (repo.language) {
+                    <span class="repo-card__pill repo-card__pill--lang">{{ repo.language }}</span>
+                  }
+                  <span class="repo-card__pill repo-card__pill--stars" title="Estrellas">
+                    <span class="repo-card__star">★</span>
+                    {{ repo.stars }}
+                  </span>
+                  <time class="repo-card__date" [attr.datetime]="repo.createdAt">
+                    {{ repo.createdAt | date: 'mediumDate' }}
+                  </time>
+                </div>
+              </a>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="repos__empty">No hay repositorios enlazados en el catálogo para este usuario.</p>
+      }
+    </section>
+  }
+</article>

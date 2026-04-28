@@ -1,6 +1,5 @@
 <header class="page-header">
   <h2>Usuarios</h2>
-  <p class="muted">Listado de usuarios</p>
 </header>
 
 @if (loading()) {
@@ -11,7 +10,7 @@
   <section class="md" aria-label="Maestro detalle usuarios">
     <div class="md__detail" aria-label="Detalle de usuario">
       @if (selectedUser()) {
-        <app-user-card [user]="selectedUser()!" />
+        <app-user-card [user]="selectedUser()!" [repositories]="selectedUserRepositories()" />
       } @else {
         <p class="muted">Selecciona un usuario para ver el detalle.</p>
       }

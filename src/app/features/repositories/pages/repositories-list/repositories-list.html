@@ -1,0 +1,46 @@
+<section class="page" aria-labelledby="repos-heading">
+  <div class="page__head">
+    <h1 id="repos-heading" class="page__title">Repositorios</h1>
+  </div>
+
+  @if (loading()) {
+    <p class="state state--muted" role="status">Cargando repositorios…</p>
+  } @else if (error()) {
+    <p class="state state--error" role="alert">{{ error() }}</p>
+  } @else if (!repositories().length) {
+    <p class="state state--muted">No hay repositorios para mostrar.</p>
+  } @else {
+    <div class="search" aria-label="Buscador">
+      <input
+        class="search__input"
+        type="search"
+        placeholder="Buscar por nombre o descripción…"
+        [value]="query()"
+        (input)="query.set(($any($event.target).value ?? ''))"
+      />
+    </div>
+
+    <ul class="list" role="list">
+      @for (repo of pagedRepositories(); track repo.id) {
+        <li class="list__item" role="listitem">
+          <app-repository-list [repository]="repo" />
+        </li>
+      }
+    </ul>
+
+    <div class="pager" aria-label="Paginación">
+      <button class="pager__btn" type="button" (click)="prevPage()" [disabled]="page() === 1">
+        Anterior
+      </button>
+      <span class="pager__text">Página {{ page() }} / {{ totalPages() }}</span>
+      <button
+        class="pager__btn"
+        type="button"
+        (click)="nextPage()"
+        [disabled]="page() === totalPages()"
+      >
+        Siguiente
+      </button>
+    </div>
+  }
+</section>

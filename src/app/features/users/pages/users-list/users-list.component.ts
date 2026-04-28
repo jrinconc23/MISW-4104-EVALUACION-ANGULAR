@@ -1,20 +1,22 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, finalize, of, tap } from 'rxjs';
-import { UserService } from '../../services/user-service';
-import { User } from '../../models/user.model';
+import { Repository } from '../../../repositories/models/repository.model';
+import { RepositoryService } from '../../../repositories/services/repository-service';
 import { UserCardComponent } from '../../components/user-card/user-card.component';
 import { UserListComponent } from '../../components/user-list/user-list.component';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-users-list',
-  standalone: true,
   imports: [UserCardComponent, UserListComponent],
   templateUrl: './users-list.component.html',
-  styleUrl: './users-list.component.css'
+  styleUrl: './users-list.component.css',
 })
 export class UsersListComponent {
   private readonly userService = inject(UserService);
+  private readonly repositoryService = inject(RepositoryService);
 
   readonly pageSize = 5;
   readonly page = signal(1);
@@ -37,6 +39,13 @@ export class UsersListComponent {
     { initialValue: [] }
   );
 
+  readonly repositories = toSignal(
+    this.repositoryService.getRepositories().pipe(
+      catchError(() => of([] as Repository[]))
+    ),
+    { initialValue: [] as Repository[] }
+  );
+
   readonly filteredUsers = computed(() => {
     const q = this.query().trim().toLowerCase();
     const users = this.users();
@@ -53,6 +62,15 @@ export class UsersListComponent {
     const users = this.filteredUsers();
     const start = (this.page() - 1) * this.pageSize;
     return users.slice(start, start + this.pageSize);
+  });
+
+  readonly selectedUserRepositories = computed((): Repository[] => {
+    const user = this.selectedUser();
+    if (!user) return [];
+    const byId = new Map(this.repositories().map((r) => [r.id, r]));
+    return user.repoIds
+      .map((id) => byId.get(id))
+      .filter((r): r is Repository => r !== undefined);
   });
 
   constructor() {
@@ -89,4 +107,3 @@ export class UsersListComponent {
     this.page.update((p) => Math.min(this.totalPages(), p + 1));
   }
 }
-

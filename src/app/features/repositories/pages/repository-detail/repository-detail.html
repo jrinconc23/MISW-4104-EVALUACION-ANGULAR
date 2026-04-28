@@ -1,0 +1,64 @@
+<section class="page" aria-labelledby="detail-heading">
+  <nav class="breadcrumb" aria-label="Navegación">
+    <a routerLink="/repositories" class="back">
+      <span class="back__icon" aria-hidden="true">←</span>
+      <span>Volver a repositorios</span>
+    </a>
+  </nav>
+
+  @let state = vm();
+  @switch (state.status) {
+    @case ('loading') {
+      <div class="state-card" role="status">
+        <p class="state state--muted">Cargando detalle…</p>
+      </div>
+    }
+    @case ('invalid-id') {
+      <div class="state-card" role="alert">
+        <p class="state state--error">El identificador del repositorio no es válido.</p>
+      </div>
+    }
+    @case ('error') {
+      <div class="state-card" role="alert">
+        <p class="state state--error">{{ state.message }}</p>
+      </div>
+    }
+    @case ('not-found') {
+      <div class="state-card">
+        <p class="state state--muted">No se encontró el repositorio.</p>
+      </div>
+    }
+    @case ('ok') {
+      <header class="hero">
+        <div class="hero__meta">
+          @if (state.repository.language) {
+            <span class="pill pill--accent">{{ state.repository.language }}</span>
+          }
+          <span class="pill pill--stars" title="Estrellas">
+            <span aria-hidden="true">★</span>
+            {{ state.repository.stars }}
+          </span>
+          <time class="pill pill--muted" [attr.datetime]="state.repository.createdAt">
+            {{ state.repository.createdAt | date: 'mediumDate' }}
+          </time>
+        </div>
+        <h1 id="detail-heading" class="hero__title">{{ state.repository.name }}</h1>
+        <p class="hero__desc">{{ state.repository.description || 'Sin descripción.' }}</p>
+      </header>
+
+      <aside class="panel panel--owner" aria-labelledby="owner-heading">
+        <h2 id="owner-heading" class="panel__title">Propietario</h2>
+        @if (state.owner) {
+          <app-user-card [user]="state.owner" />
+        } @else {
+          <div class="owner-fallback">
+            <p class="owner-fallback__text">
+              No hay un usuario en el catálogo que coincida con el propietario
+              <code class="mono">#{{ state.repository.ownerId }}</code>.
+            </p>
+          </div>
+        }
+      </aside>
+    }
+  }
+</section>

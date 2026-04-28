@@ -3,39 +3,38 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
-import { UsersListComponent } from './users-list.component';
-import { User } from '../../models/user.model';
+import { RepositoriesList } from './repositories-list';
+import { Repository } from '../../models/repository.model';
 
-describe('UsersListComponent', () => {
-  let component: UsersListComponent;
-  let fixture: ComponentFixture<UsersListComponent>;
+describe('RepositoriesList', () => {
+  let component: RepositoriesList;
+  let fixture: ComponentFixture<RepositoriesList>;
   let httpMock: HttpTestingController;
 
-  const mockUsers: User[] = [
+  const mockRepos: Repository[] = [
     {
       id: 1,
-      username: 'u1',
-      name: 'User One',
-      email: 'u1@example.com',
-      avatarUrl: 'https://example.com/a.png',
-      role: 'dev',
-      location: 'CO',
-      repoIds: [10],
+      name: 'a',
+      description: 'd',
+      language: 'TS',
+      stars: 1,
+      createdAt: '2020-01-01',
+      ownerId: 1,
     },
   ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsersListComponent],
+      imports: [RepositoriesList],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
     }).compileComponents();
 
     httpMock = TestBed.inject(HttpTestingController);
-    fixture = TestBed.createComponent(UsersListComponent);
+    fixture = TestBed.createComponent(RepositoriesList);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    httpMock.expectOne((r) => r.url.includes('users.json')).flush(mockUsers);
-    httpMock.expectOne((r) => r.url.includes('repositories.json')).flush([]);
+    const req = httpMock.expectOne((r) => r.url.includes('repositories.json'));
+    req.flush(mockRepos);
     await fixture.whenStable();
     fixture.detectChanges();
   });

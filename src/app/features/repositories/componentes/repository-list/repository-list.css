@@ -1,0 +1,126 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'head meta'
+    'desc meta';
+  gap: 0.35rem 0.85rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.card:hover {
+  background: rgba(56, 189, 248, 0.06);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+}
+
+.card:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.65);
+  outline-offset: 2px;
+}
+
+.card__head {
+  grid-area: head;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.card__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: rgba(15, 23, 42, 0.92);
+  line-height: 1.25;
+  word-break: break-word;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.card__desc {
+  grid-area: desc;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: rgba(15, 23, 42, 0.68);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card__meta {
+  grid-area: meta;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: flex-start;
+  justify-content: flex-end;
+  align-content: flex-start;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.pill--accent {
+  text-transform: uppercase;
+  background: rgba(56, 189, 248, 0.16);
+  color: rgba(14, 116, 144, 0.98);
+  border-color: rgba(56, 189, 248, 0.28);
+}
+
+.pill--stars {
+  background: rgba(254, 243, 199, 0.65);
+  color: rgba(146, 64, 14, 0.95);
+  border-color: rgba(251, 191, 36, 0.35);
+}
+
+.pill--muted {
+  font-weight: 650;
+  text-transform: none;
+  letter-spacing: 0;
+  background: rgba(15, 23, 42, 0.04);
+  color: rgba(15, 23, 42, 0.62);
+}
+
+@media (max-width: 640px) {
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'head'
+      'desc'
+      'meta';
+  }
+
+  .card__meta {
+    justify-content: flex-start;
+  }
+}

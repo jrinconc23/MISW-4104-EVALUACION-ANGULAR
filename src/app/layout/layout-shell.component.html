@@ -1,21 +1,50 @@
 <div class="shell">
   <header class="header" role="banner">
     <div class="header__inner">
-      <a class="brand" routerLink="/" aria-label="Ir al inicio">
-        <img class="brand__logo" src="/logo.svg" alt="Logo" />
+      <a class="brand" routerLink="/" aria-label="Ir al inicio — catálogo de usuarios y repositorios">
+        <img class="brand__logo" src="/logo.svg" alt="" />
         <span class="brand__title">{{ title() }}</span>
       </a>
+
+      <button
+        class="menu-btn"
+        type="button"
+        (click)="toggleMobileMenu()"
+        [attr.aria-expanded]="mobileMenuOpen()"
+        aria-controls="mobile-sidebar"
+      >
+        <span class="menu-btn__icon" aria-hidden="true">☰</span>
+        <span class="menu-btn__text">Menú</span>
+      </button>
     </div>
   </header>
 
   <div class="body">
-    <aside class="sidebar" aria-label="Menú principal">
+    @if (mobileMenuOpen()) {
+      <div class="overlay" role="presentation" (click)="closeMobileMenu()"></div>
+    }
+
+    <aside
+      id="mobile-sidebar"
+      class="sidebar"
+      [class.sidebar--open]="mobileMenuOpen()"
+      aria-label="Menú principal"
+    >
       <nav class="nav">
-        <a class="nav__item" routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">
+        <a
+          class="nav__item"
+          routerLink="/"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="closeMobileMenu()"
+        >
           Inicio
         </a>
-        <a class="nav__item" routerLink="/users" routerLinkActive="is-active">
+        <a class="nav__item" routerLink="/users" routerLinkActive="is-active" (click)="closeMobileMenu()">
           Usuarios
+        </a>
+        <a class="nav__item" routerLink="/repositories" routerLinkActive="is-active" (click)="closeMobileMenu()">
+          Repositorios
         </a>
       </nav>
     </aside>

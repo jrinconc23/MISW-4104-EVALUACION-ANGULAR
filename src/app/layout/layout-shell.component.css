@@ -5,6 +5,13 @@
   min-height: 100dvh;
   color: #0f172a;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  overflow-x: clip;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: border-box;
 }
 
 .shell {
@@ -12,6 +19,7 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   background: #f6f7fb;
+  overflow-x: clip;
 }
 
 .header {
@@ -32,6 +40,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  min-width: 0;
 }
 
 .footer__inner {
@@ -46,6 +55,7 @@
   text-decoration: none;
   color: inherit;
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 .brand__logo {
@@ -65,6 +75,34 @@
   white-space: nowrap;
 }
 
+.menu-btn {
+  display: none;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(255, 255, 255, 0.85);
+  font-weight: 700;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.menu-btn:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.menu-btn:focus-visible {
+  outline: 2px solid rgba(56, 189, 248, 0.65);
+  outline-offset: 2px;
+}
+
+.menu-btn__icon {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
 .body {
   max-width: 1100px;
   width: 100%;
@@ -73,6 +111,11 @@
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 1rem;
+  min-width: 0;
+}
+
+.overlay {
+  display: none;
 }
 
 .sidebar {
@@ -114,6 +157,8 @@
   padding: 1rem;
   box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
   min-height: 50dvh;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .footer {
@@ -128,6 +173,37 @@
 @media (max-width: 900px) {
   .body {
     grid-template-columns: 1fr;
+  }
+
+  .menu-btn {
+    display: inline-flex;
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.35);
+    backdrop-filter: blur(2px);
+    z-index: 40;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .sidebar.sidebar--open {
+    display: block;
+    position: fixed;
+    z-index: 50;
+    top: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(520px, calc(100% - 2rem));
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0.75rem;
+    box-shadow: 0 20px 60px rgba(2, 6, 23, 0.22);
   }
 }
 

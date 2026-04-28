@@ -1,0 +1,24 @@
+<a
+  class="card"
+  [routerLink]="['/repositories', repository().id]"
+  [attr.aria-label]="'Ver detalle de ' + repository().name"
+>
+  <header class="card__head">
+    <h2 class="card__title">{{ repository().name }}</h2>
+    @if (repository().language) {
+      <span class="pill pill--accent">{{ repository().language }}</span>
+    }
+  </header>
+
+  <p class="card__desc">{{ repository().description || 'Sin descripción.' }}</p>
+
+  <div class="card__meta">
+    <span class="pill pill--stars" title="Estrellas">
+      <span aria-hidden="true">★</span>
+      {{ repository().stars }}
+    </span>
+    <time class="pill pill--muted" [attr.datetime]="repository().createdAt">
+      {{ repository().createdAt | date: 'mediumDate' }}
+    </time>
+  </div>
+</a>
