@@ -14,11 +14,20 @@ describe('RepositoriesList', () => {
   const mockRepos: Repository[] = [
     {
       id: 1,
-      name: 'a',
+      name: 'alpha-repo',
       description: 'd',
       language: 'TS',
       stars: 1,
       createdAt: '2020-01-01',
+      ownerId: 1,
+    },
+    {
+      id: 2,
+      name: 'beta-search',
+      description: 'other',
+      language: 'JS',
+      stars: 2,
+      createdAt: '2020-01-02',
       ownerId: 1,
     },
   ];
@@ -45,5 +54,19 @@ describe('RepositoriesList', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render repository names from the service', () => {
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('alpha-repo');
+    expect(el.textContent).toContain('beta-search');
+  });
+
+  it('should filter by search query on name or description', () => {
+    component.query.set('other');
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('beta-search');
+    expect(el.textContent).not.toContain('alpha-repo');
   });
 });

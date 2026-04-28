@@ -68,4 +68,50 @@ describe('RepositoryDetail', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show repository name and owner when data loads', () => {
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('repo-seven');
+    expect(el.textContent).toContain('Owner Ninety Nine');
+  });
+
+  it('should include link back to repositories list', () => {
+    const el = fixture.nativeElement as HTMLElement;
+    const back = el.querySelector('a.back');
+    expect(back?.textContent).toContain('Volver');
+  });
+});
+
+describe('RepositoryDetail (invalid id)', () => {
+  let fixture: ComponentFixture<RepositoryDetail>;
+  let httpMock: HttpTestingController;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [RepositoryDetail],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        {
+          provide: ActivatedRoute,
+          useValue: { paramMap: of(convertToParamMap({ id: 'not-a-number' })) },
+        },
+      ],
+    }).compileComponents();
+
+    httpMock = TestBed.inject(HttpTestingController);
+    fixture = TestBed.createComponent(RepositoryDetail);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should render invalid-id message without calling HTTP', () => {
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('identificador del repositorio no es válido');
+  });
 });

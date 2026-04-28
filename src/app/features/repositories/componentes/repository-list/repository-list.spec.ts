@@ -27,10 +27,18 @@ describe('RepositoryList', () => {
     fixture = TestBed.createComponent(RepositoryList);
     fixture.componentRef.setInput('repository', mockRepository);
     component = fixture.componentInstance;
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render repository name, language and stars', () => {
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('demo-repo');
+    expect(el.textContent).toContain('TypeScript');
+    expect(el.textContent).toContain('42');
   });
 });
